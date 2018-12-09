@@ -1,0 +1,68 @@
+<!doctype html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>Inicio</title>
+        <link rel="stylesheet" type="text/css" href="../css/estilo.css">
+        <script src="../script/script.js"></script>
+	</head>
+
+	<body class="fundoGeral" onLoad="setBgImg('');">
+    	<header class="headerEditar">
+       	  <div class="centro">
+        		<a class="menuPrincipal" href="inicio.html">Inicio</a>
+               	<a class="menuPrincipal" href="projetos.html">Projetos</a>
+                <a class="menuPrincipal" href="ilustra.html">Ilustrações</a>
+                <a class="menuPrincipal" href="pedidos.php">Pedidos</a>
+        	</div>
+			<div class="cookieEscolha">
+				<form id="escolha">
+					Escolha de tema<br/>
+					<input type="radio" name="cores" value="natureza" id="tema1" onClick="setBgImg('nat');">Natureza<br/>
+					<input type="radio" name="cores" value="escuro" id="tema2" onClick="setBgImg('esc');">Escuro<br/>
+					<input type="radio" name="cores" value="claro" id="tema3" onClick="setBgImg('cla');">Claro<br/>
+				</form>
+			</div>
+        </header>
+        <nav class="corpo1">
+       		<video autoplay loop muted controls class="videoInicio">        
+				<source src="../videos/haruhiVideo.mp4" type="video/mp4">
+			</video>           
+            <center>
+                <h1 class="tituloLancamentos">Lançamentos</h1>
+                <table class="editarTabela">
+                    <tr>
+                        <th class="tituloTable">Nome</th>
+                        <th class="tituloTable">Capitulo</th>
+                        <th class="tituloTable">Data</th>
+                    </tr>
+                    <tr class="tableLink1">
+                        <td><a href="amenovel.html">AME NO HI NO IRIS</a></td>
+                        <td><a href="amecap01.html">01</a></td>
+                        <td><a href="amecap01.html">01-01-2018</a></td>
+                    </tr>
+                    <tr class="tableLink2">
+                        <td><a href="arifuretanovel.html">ARIFURETA SHOKUGYOU DE SEKAI SAIKYOU</a></td>
+                        <td><a href="arifuretacap02.html">02</a></td>
+                        <td><a href="arifuretacap02.html">05-03-2018</a></td>
+                    </tr>
+                    <tr class="tableLink1">
+                        <td><a href="cultnovel.html">CULT OF THE SACRED RUNES</a></td>
+                        <td><a href="cultcap01.html">01</a></td>
+                        <td><a href="cultcap01.html">27-05-2018</a></td>
+                    </tr>
+                </table>
+            </center>
+        </nav>
+		<footer class="rodape">
+			<center>
+				<h4>
+				<br>
+					Flávio Augusto Nassor de morais BCC 5ºPeriodo 
+					<br>
+					Trabalho Professora Janaina Faustino 
+				</h4>
+			</center>
+		</footer>
+</body>
+</html>
