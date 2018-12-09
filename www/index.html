@@ -1,75 +1,110 @@
+<!DOCTYPE html>
+<!--
+    Copyright (c) 2012-2016 Adobe Systems Incorporated. All rights reserved.
+
+    Licensed to the Apache Software Foundation (ASF) under one
+    or more contributor license agreements.  See the NOTICE file
+    distributed with this work for additional information
+    regarding copyright ownership.  The ASF licenses this file
+    to you under the Apache License, Version 2.0 (the
+    "License"); you may not use this file except in compliance
+    with the License.  You may obtain a copy of the License at
+
+    http://www.apache.org/licenses/LICENSE-2.0
+
+    Unless required by applicable law or agreed to in writing,
+    software distributed under the License is distributed on an
+    "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
+     KIND, either express or implied.  See the License for the
+    specific language governing permissions and limitations
+    under the License.
+-->
 <html>
 
 <head>
-<title>CRUD Operation</title>
-	<meta charset="utf-8" />
+    <meta charset="utf-8" />
     <meta name="format-detection" content="telephone=no" />
     <meta name="msapplication-tap-highlight" content="no" />
     <meta name="viewport" content="width=device-width, initial-scale=1">
 	<link rel="stylesheet" href="css/bootstrap.min.css">
 	<script src="js/jquery.min.js"></script>
 	<script src="js/bootstrap.min.js"></script>
-    <link rel="stylesheet" type="text/css" href="css/ionic.css">
-    <script type="text/javascript" src="js/jquery.js"></script>
-    <script type="text/javascript">
-    $(document).ready(function() {
-        $("#insert").click(function() {
-            var title = $("#title").val();
-            var duration = $("#duration").val();
-            var price = $("#price").val();
-            var dataString = "title=" + title + "&duration=" + duration + "&price=" + price + "&insert=";
-            if ($.trim(title).length > 0 & $.trim(duration).length > 0 & $.trim(price).length > 0) {
-                $.ajax({
-                    type: "POST",
-                    url: "https://flaviobcctestebd.000webhostapp.com/insert.php",
-                    data: dataString,
-                    crossDomain: true,
-                    cache: false,
-                    beforeSend: function() {
-                        $("#insert").val('Connecting...');
-                    },
-                    success: function(data) {
-                        if (data == "success") {
-                            alert("inserted");
-                            $("#insert").val('submit');
-                        } else if (data == "error") {
-                            alert("error");
-                        }
-                    }
-                });
-            }
-            return false;
-        });
-    });
-    </script>
+  
+  
+  <style>
+    /* Remove the navbar's default margin-bottom and rounded borders */ 
+    .navbar {
+      margin-bottom: 0;
+      border-radius: 0;
+    }
+    
+    /* Set height of the grid so .sidenav can be 100% (adjust as needed) */
+    .row.content {height: 450px}
+    
+    /* Set gray background color and 100% height */
+    .sidenav {
+      padding-top: 20px;
+      background-color: #f1f1f1;
+      height: 100%;
+    }
+    
+    /* Set black background color, white text and some padding */
+    footer {
+      background-color: #555;
+      color: white;
+      padding: 15px;
+    }
+    
+    /* On small screens, set height to 'auto' for sidenav and grid */
+    @media screen and (max-width: 767px) {
+      .sidenav {
+        height: auto;
+        padding: 15px;
+      }
+      .row.content {height:auto;} 
+    }
+  </style>
+    <!-- This is a wide open CSP declaration. To lock this down for production, see below. -->
+    <meta http-equiv="Content-Security-Policy" content="default-src * 'unsafe-inline'; style-src 'self' 'unsafe-inline'; media-src *" />
+    <!-- Good default declaration:
+    * gap: is required only on iOS (when using UIWebView) and is needed for JS->native communication
+    * https://ssl.gstatic.com is required only on Android and is needed for TalkBack to function properly
+    * Disables use of eval() and inline scripts in order to mitigate risk of XSS vulnerabilities. To change this:
+        * Enable inline JS: add 'unsafe-inline' to default-src
+        * Enable eval(): add 'unsafe-eval' to default-src
+    * Create your own at http://cspisawesome.com
+    -->
+    <!-- <meta http-equiv="Content-Security-Policy" content="default-src 'self' data: gap: 'unsafe-inline' https://ssl.gstatic.com; style-src 'self' 'unsafe-inline'; media-src *" /> -->
+
+    <link rel="stylesheet" type="text/css" href="css/index.css" />
+    <title>Hello World</title>
 </head>
 
 <body>
-    <div class="bar bar-header bar-positive" style="margin-bottom:80px;background-color: green">
-        <h1 class="title">Employee Details</h1>
-        <a class="button button-clear" href="readjson.html">Read Data</a>
-    </div>
-    <br/>
-    <br/>
-    <div class="list">
-        <input type="hidden" id="id" value="" />
-        <div class="item">
-            <label>Employee Name</label>
-            <input type="text" id="title" value="" />
-        </div>
-        <div class="item">
-            <label>Employee Position</label>
-            <input type="text" id="duration" value="" />
-        </div>
-        <div class="item">
-            <label>Employee Salary</label>
-            <input type="text" id="price" value="" />
-        </div>
-        <div class="item">
-            <input type="button" id="insert" class="button button-block" value="Insert" />
-        </div>
-    </div>
-	<script type="text/javascript" src="cordova.js"></script>
+	<nav class="navbar navbar-inverse">
+	  <div class="container-fluid">
+		<div class="navbar-header">
+		  <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
+			<span class="icon-bar"></span>
+			<span class="icon-bar"></span>
+			<span class="icon-bar"></span>                        
+		  </button>
+		  <a class="navbar-brand" href="#">Logo</a>
+		</div>
+		<div class="collapse navbar-collapse" id="myNavbar">
+		  <ul class="nav navbar-nav">
+			<li class="active"><a href="#">Home</a></li>
+			<li><a href="#">About</a></li>
+			<li><a href="#">Projects</a></li>
+			<li><a href="#">Contact</a></li>
+		  </ul>
+		  <ul class="nav navbar-nav navbar-right">
+			<li><a href="#"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
+		  </ul>
+		</div>
+	  </div>
+	</nav>
+    <script type="text/javascript" src="cordova.js"></script>
     <script type="text/javascript" src="js/index.js"></script>
     <script type="text/javascript">
         app.initialize();
