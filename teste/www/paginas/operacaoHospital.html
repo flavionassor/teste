@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="format-detection" content="telephone=no" />
+    <meta name="msapplication-tap-highlight" content="no" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+	<link rel="stylesheet" href="../css/bootstrap.min.css">
+	<script type="text/javascript" src="../js/geturi.js"></script>
+	<script src="../js/jquery.min.js"></script>
+	<script src="../js/bootstrap.min.js"></script>
+ 
+    <meta http-equiv="Content-Security-Policy" content="default-src * 'unsafe-inline'; style-src 'self' 'unsafe-inline'; media-src *" />
+	
+	<script type="text/javascript">
+    $(document).ready(function() {
+		var id = decodeURI(getUrlVars()["id"]);
+        var nome = decodeURI(getUrlVars()["nome"]);
+        var especialidade = decodeURI(getUrlVars()["especialidade"]);
+        var telefone = decodeURI(getUrlVars()["telefone"]);
+        $("#id").val(id);
+		$("#nome").val(nome);		
+        $("#especialidade").val(especialidade);
+        $("#telefone").val(telefone);
+		$("#ctabela").append("<tbody><tr><td>"+id+"</td><td>"+nome+"</td><td>"+especialidade+"</td><td>"+telefone+"</td><td></td></tr></tbody>");		
+		$("#btn").click(function() {
+			var id = $("#id").val();
+			var nome = $("#nome").val();
+			var nomeconfirma = $("#nomeconfirma").val();
+			var especialidade = $("#especialidade").val();
+			var telefone = $("#telefone").val();
+			var dataString = "id=" + id + "&nome=" + nome + "&nomeconfirma=" + nomeconfirma + "&especialidade=" + especialidade + "&telefone=" + telefone + "&update=";
+			$.ajax({
+				type: "POST",
+				url: "https://flaviobcctestebd.000webhostapp.com/selectpendente.php",
+				//url: "http://localhost/teste/www/php/selectpendente.php",
+				data: dataString,
+				crossDomain: true,
+				cache: false,
+				success: function(data) {
+					window.location.replace("inicioHospital.html");
+				}
+			});
+		});
+    });
+    </script>
+    <title>Hello World</title>
+</head>
+
+<body>
+	<nav class="navbar navbar-inverse">
+	  <div class="container-fluid">
+		<div class="navbar-header">
+		  <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
+			<span class="icon-bar"></span>
+			<span class="icon-bar"></span>
+			<span class="icon-bar"></span>                        
+		  </button>
+		  <a class="navbar-brand" href="inicioHospital.html">Logo</a>
+		</div>
+		<div class="collapse navbar-collapse" id="myNavbar">
+		  <ul class="nav navbar-nav">
+			<li class="active"><a href="inicioHospital.html">Home</a></li>
+			<li><a href="contratarHospital.html">Contratar Médico</a></li>
+			<li><a href="contratosPendentes.html">Contratos Pendentes</a></li>
+		  </ul>
+		 </div>
+	  </div>
+	</nav>
+	<table id="ctabela" class="table table-hover">
+		  <thead>
+			<tr>
+				<th scope="col">ID</th>
+				<th scope="col">Nome</th>
+				<th scope="col">Especialidade</th>
+				<th scope="col">Telefone</th>
+			</tr>
+		  </thead>
+
+		</table>
+		<input type="hidden" id="id" value="" />
+        <input type="hidden" id="especialidade" value="" />
+		<input type="hidden" id="telefone" value="" />
+		<div class="container" id="loginInicio">
+			<h3>Confirme o Login<h3>
+			  <div class="form-group">
+				<label for="email">Usuario:</label>
+				<input id="nomeconfirma"type="text" class="form-control" id="email">
+			  </div>
+			  <div class="form-group">
+				<label for="pwd">Senha:</label>
+				<input id="senhaConfirma" type="password" class="form-control" id="pwd">
+			  </div>
+			  <button id="btn" type="entrar" class="btn btn-default">Confirmar</button>
+		</div>
+</body>
+
+</html>

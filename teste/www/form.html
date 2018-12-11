@@ -20,6 +20,7 @@
             var duration = $("#duration").val();
             var price = $("#price").val();
             var dataString = "id=" + id + "&title=" + title + "&duration=" + duration + "&price=" + price + "&update=";
+			alert(dataString);
             $.ajax({
                 type: "POST",
                 url: "https://flaviobcctestebd.000webhostapp.com/update.php",

@@ -20,6 +20,38 @@
     -webkit-tap-highlight-color: rgba(0,0,0,0); /* make transparent link selection, adjust last value opacity 0 to 1.0 */
 }
 
+/* Remove the navbar's default margin-bottom and rounded borders */ 
+		.navbar {
+		  margin-bottom: 0;
+		  border-radius: 0;
+		}
+		
+		/* Set height of the grid so .sidenav can be 100% (adjust as needed) */
+		.row.content {height: 450px}
+		
+		/* Set gray background color and 100% height */
+		.sidenav {
+		  padding-top: 20px;
+		  background-color: #f1f1f1;
+		  height: 100%;
+		}
+		
+		/* Set black background color, white text and some padding */
+		footer {
+		  background-color: #555;
+		  color: white;
+		  padding: 15px;
+		}
+		
+		/* On small screens, set height to 'auto' for sidenav and grid */
+		@media screen and (max-width: 767px) {
+		  .sidenav {
+			height: auto;
+			padding: 15px;
+		  }
+		  .row.content {height:auto;} 
+		}
+		
 body {
     -webkit-touch-callout: none;                /* prevent callout to copy image, etc when tap to hold */
     -webkit-text-size-adjust: none;             /* prevent webkit from resizing text to fit */
@@ -49,8 +81,8 @@ body {
 .app {
     background:url(../img/logo.png) no-repeat center top; /* 170px x 200px */
     position:absolute;             /* position in the center of the screen */
-    left:50%;
-    top:50%;
+    left:25%;
+    top:25%;
     height:50px;                   /* text area height */
     width:225px;                   /* text area width */
     text-align:center;

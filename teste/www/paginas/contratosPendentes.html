@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="format-detection" content="telephone=no" />
+    <meta name="msapplication-tap-highlight" content="no" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+	<link rel="stylesheet" href="../css/bootstrap.min.css">
+	<script src="../js/jquery.min.js"></script>
+	<script src="../js/bootstrap.min.js"></script>
+    <meta http-equiv="Content-Security-Policy" content="default-src * 'unsafe-inline'; style-src 'self' 'unsafe-inline'; media-src *" />
+	<script type="text/javascript">
+		$(document).ready(function() {
+			$("#btnpend").click(function(){		
+				var count =0;
+				var idpend = $("#idpend").val();
+				var senhapend = $("#senhapend").val();
+				var dataString = "idpend=" + idpend + "&senhapend=" + senhapend + "&update=";
+				$.ajax({
+					type: "POST",
+					url: "https://flaviobcctestebd.000webhostapp.com/buscarpendentes.php",
+					//url: "http://localhost/teste/www/php/selectpendente.php",
+					data: dataString,
+					crossDomain: true,
+					cache: false,
+					success: function(data) {
+					var id;
+					var nome;
+					var especialidade;
+					var telefone;	
+						var i=0,j=0,k=0,l=0;
+						var aspas = '"';
+						for(k=0;k<data.length;k++){
+							if(count < 5){
+								if(data[k] == aspas){
+									for(l=k+1;l<data.length;l++){
+										if(data[l] == aspas){
+											for(i=l+1;i<data.length;i++){						
+												if(data[i] == aspas){
+													for(j=i+1;j<data.length;j++){
+														if(data[j] == aspas){
+															var valores = data.substring(i+1,j);														
+															if(count==0){
+																$("#tabpend").append("<tr>");
+																id = valores;
+																$("#tabpend").append("<td>"+id+"</td>");
+																alert(id);
+															}
+															if(count==1){
+																nome = valores;
+																$("#tabpend").append("<td>"+nome+"</td>");
+																alert(nome);
+															}
+															if(count==2){
+																especialidade = valores;
+																$("#tabpend").append("<td>"+valores+"</td>");
+																alert(especialidade);
+															}
+															if(count==3){
+																telefone = valores;
+																$("#tabpend").append("<td>"+valores+"</td>");
+																alert(telefone);
+															}
+															if(count==4){
+																if(valores<0){
+																	valores = "Aguardando";
+																	alert(valores);
+																	$("#tabpend").append("<td>"+valores+"</td>");
+																	$("#tabpend").append("<td><a class='item' href='operacaoPendentesH.html?id="+id+"&nome="+nome+"&especialidade="+especialidade+"&telefone="+telefone+"'><button type='button' class='btn btn-dark'>Cancelar</button></a></td>");							
+																	$("#tabpend").append("</tr>");
+																}else{
+																	valores = "Aceito";
+																	alert(valores);
+																	$("#tabpend").append("<td>"+valores+"</td>");
+																	$("#tabpend").append("<td><a class='item' href='operacaoPendentesH.html?id="+id+"&nome="+nome+"&especialidade="+especialidade+"&telefone="+telefone+"'><button type='button' class='btn btn-dark'>Cancelar</button></a></td>");							
+																	$("#tabpend").append("</tr>");
+																}
+															}
+															count++;
+															data[i]=" ";
+															data[j]=" ";
+															k=j+1;
+															j=data.length;
+															i =data.length;
+															l =data.length;														
+														}
+													}
+												}
+											}
+										}
+									}
+								}
+							}
+							else{								
+								count =0;
+							}
+						}
+					}
+				});
+			});
+			$("#btnpend").click(function(){
+				var display = document.getElementById("minhaDiv").style.display;
+				if(display == "none")
+					document.getElementById("minhaDiv").style.display = 'block';
+				else
+					document.getElementById("minhaDiv").style.display = 'none';
+			});
+		});
+	</script>
+    <title>Hello World</title>
+</head>
+
+<body>
+	<nav class="navbar navbar-inverse">
+	  <div class="container-fluid">
+		<div class="navbar-header">
+		  <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
+			<span class="icon-bar"></span>
+			<span class="icon-bar"></span>
+			<span class="icon-bar"></span>                        
+		  </button>
+		  <a class="navbar-brand" href="inicioHospital.html">Logo</a>
+		</div>
+		<div class="collapse navbar-collapse" id="myNavbar">
+		  <ul class="nav navbar-nav">
+			<li class="active"><a href="inicioHospital.html">Home</a></li>
+			<li><a href="contratarHospital.html">Contratar Médico</a></li>
+			<li><a href="#">Contratos Pendentes</a></li>
+		  </ul>
+		 </div>
+	  </div>
+	</nav>
+	<div class="container" id="minhaDiv">
+		<h3>Confirme o Login<h3>
+			<div class="form-group">
+				<label for="idpend">Usuario:</label>
+				<input id="idpend"type="text" class="form-control">
+			</div>
+			<div class="form-group">
+				<label for="senhapend">Senha:</label>
+				<input id="senhapend" type="password" class="form-control">
+			</div>
+		 <button id="btnpend" type="entrar" class="btn btn-default">Confirmar</button>
+	</div>
+	<nav >
+		<table class="table table-hover">
+		  <thead>
+			<tr>
+				<th scope="col">id</th>
+				  <th scope="col">Nome</th>
+				  <th scope="col">Especialidade</th>
+				  <th scope="col">Telefone</th>
+				  <th scope="col">Estado</th>
+				  <th scope="col">Cancelar</th>
+			</tr>
+		  </thead>
+		  <tbody id="tabpend">
+		  </tbody>		  
+		</table>
+	</nav>
+
+</body>
+
+</html>
