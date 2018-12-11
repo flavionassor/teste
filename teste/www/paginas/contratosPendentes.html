@@ -16,7 +16,7 @@
 				var count =0;
 				var idpend = $("#idpend").val();
 				var senhapend = $("#senhapend").val();
-				var dataString = "idpend=" + idpend + "&senhapend=" + senhapend + "&update=";
+				var dataString = "id=" + idpend + "&senha=" + senhapend + "&update=";
 				$.ajax({
 					type: "POST",
 					url: "https://flaviobcctestebd.000webhostapp.com/buscarpendentes.php",
@@ -45,33 +45,27 @@
 																$("#tabpend").append("<tr>");
 																id = valores;
 																$("#tabpend").append("<td>"+id+"</td>");
-																alert(id);
 															}
 															if(count==1){
 																nome = valores;
 																$("#tabpend").append("<td>"+nome+"</td>");
-																alert(nome);
 															}
 															if(count==2){
 																especialidade = valores;
 																$("#tabpend").append("<td>"+valores+"</td>");
-																alert(especialidade);
 															}
 															if(count==3){
 																telefone = valores;
 																$("#tabpend").append("<td>"+valores+"</td>");
-																alert(telefone);
 															}
 															if(count==4){
 																if(valores<0){
 																	valores = "Aguardando";
-																	alert(valores);
 																	$("#tabpend").append("<td>"+valores+"</td>");
 																	$("#tabpend").append("<td><a class='item' href='operacaoPendentesH.html?id="+id+"&nome="+nome+"&especialidade="+especialidade+"&telefone="+telefone+"'><button type='button' class='btn btn-dark'>Cancelar</button></a></td>");							
 																	$("#tabpend").append("</tr>");
 																}else{
 																	valores = "Aceito";
-																	alert(valores);
 																	$("#tabpend").append("<td>"+valores+"</td>");
 																	$("#tabpend").append("<td><a class='item' href='operacaoPendentesH.html?id="+id+"&nome="+nome+"&especialidade="+especialidade+"&telefone="+telefone+"'><button type='button' class='btn btn-dark'>Cancelar</button></a></td>");							
 																	$("#tabpend").append("</tr>");
@@ -108,7 +102,7 @@
 			});
 		});
 	</script>
-    <title>Hello World</title>
+    <title>ContratosPendentes</title>
 </head>
 
 <body>
@@ -120,7 +114,7 @@
 			<span class="icon-bar"></span>
 			<span class="icon-bar"></span>                        
 		  </button>
-		  <a class="navbar-brand" href="inicioHospital.html">Logo</a>
+		  <a class="navbar-brand" href="inicioHospital.html"><img style="width: 50px; height: auto;" src="../img/logomed.png"></img></a>
 		</div>
 		<div class="collapse navbar-collapse" id="myNavbar">
 		  <ul class="nav navbar-nav">

@@ -13,11 +13,10 @@ $(document).ready(function() {
 							cache: false,
 							success: function(data) {
 								if(data.substring(12,13) == "1"){
-									alert(data);
 									window.location.replace("paginas/inicioHospital.html");
 								}
 								if(data.substring(12,13) == "0"){
-									window.location.replace("paginas/inicioHospital.html");
+									window.location.replace("paginas/inicioContratado.html");
 								}							
 							}
 						});

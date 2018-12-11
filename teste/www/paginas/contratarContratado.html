@@ -7,14 +7,96 @@
     <meta name="msapplication-tap-highlight" content="no" />
     <meta name="viewport" content="width=device-width, initial-scale=1">
 	<link rel="stylesheet" href="../css/bootstrap.min.css">
-	<link rel="stylesheet" type="text/css" href="css/index.css" />
 	<script src="../js/jquery.min.js"></script>
 	<script src="../js/bootstrap.min.js"></script>
-
-  </style>
     <meta http-equiv="Content-Security-Policy" content="default-src * 'unsafe-inline'; style-src 'self' 'unsafe-inline'; media-src *" />
-    <link rel="stylesheet" type="text/css" href="css/index.css" />
-    <title>Hello World</title>
+	<script type="text/javascript">
+		$(document).ready(function() {
+			$("#btnp").click(function(){		
+				var count =0;
+				var idp = $("#idp").val();
+				var senhap = $("#senhap").val();
+				var dataString = "idp=" + idp + "&senhap=" + senhap + "&update=";
+				$.ajax({
+					type: "POST",
+					url: "https://flaviobcctestebd.000webhostapp.com/buscaServico.php",
+					//url: "http://localhost/teste/www/php/selectpendente.php",
+					data: dataString,
+					crossDomain: true,
+					cache: false,
+					success: function(data) {
+					var id;
+					var nome;
+					var especialidade;
+					var telefone;
+					var endereco;
+						var i=0,j=0,k=0,l=0;
+						var aspas = '"';
+						for(k=0;k<data.length;k++){
+							if(count < 5){
+								if(data[k] == aspas){
+									for(l=k+1;l<data.length;l++){
+										if(data[l] == aspas){
+											for(i=l+1;i<data.length;i++){						
+												if(data[i] == aspas){
+													for(j=i+1;j<data.length;j++){
+														if(data[j] == aspas){
+															var valores = data.substring(i+1,j);														
+															if(count==0){
+																$("#tabpend").append("<tr>");
+																id = valores;
+																$("#tabpend").append("<td>"+id+"</td>");
+															}
+															if(count==1){
+																nome = valores;
+																$("#tabpend").append("<td>"+nome+"</td>");
+															}
+															if(count==2){
+																especialidade = valores;
+																$("#tabpend").append("<td>"+valores+"</td>");
+															}
+															if(count==3){
+																telefone = valores;
+																$("#tabpend").append("<td>"+valores+"</td>");
+															}
+															if(count==4){
+															endereco = valores;
+																	$("#tabpend").append("<td>"+valores+"</td>");
+																	$("#tabpend").append("<td><a class='item' href='operacaoPendentesC.html?id="+id+"&nome="+nome+"&especialidade="+especialidade+"&telefone="+telefone+"'><button type='button' class='btn btn-dark'>Aceitar</button></a></td>");							
+																	$("#tabpend").append("</tr>");
+															}
+															count++;
+															data[i]=" ";
+															data[j]=" ";
+															k=j+1;
+															j=data.length;
+															i =data.length;
+															l =data.length;														
+														}
+													}
+												}
+											}
+										}
+									}
+								}
+							}
+							else{								
+								count =0;
+							}
+						}
+					}
+				});
+			});
+			$("#btnpend").click(function(){
+				var display = document.getElementById("minhaDiv").style.display;
+				if(display == "none")
+					document.getElementById("minhaDiv").style.display = 'block';
+				else
+					document.getElementById("minhaDiv").style.display = 'none';
+			});
+		});
+	</script>
+    <title>ContratarContrato</title>
 </head>
 
 <body>
@@ -26,7 +108,7 @@
 			<span class="icon-bar"></span>
 			<span class="icon-bar"></span>                        
 		  </button>
-		  <a class="navbar-brand" href="inicioContratado.html">Logo</a>
+		  <a class="navbar-brand" href="inicioContratado.html"><img style="width: 50px; height: auto;" src="../img/logomed.png"></img></a>
 		</div>
 		<div class="collapse navbar-collapse" id="myNavbar">
 		  <ul class="nav navbar-nav">
@@ -36,47 +118,35 @@
 		 </div>
 	  </div>
 	</nav>
+	<div class="container" id="minhaDiv">
+		<h3>Confirme o Login<h3>
+			<div class="form-group">
+				<label for="idp">Usuario:</label>
+				<input id="idp"type="text" class="form-control">
+			</div>
+			<div class="form-group">
+				<label for="senhap">Senha:</label>
+				<input id="senhap" type="password" class="form-control">
+			</div>
+		 <button id="btnp" type="entrar" class="btn btn-default">Confirmar</button>
+	</div>
 	<nav >
 		<table class="table table-hover">
 		  <thead>
 			<tr>
-			  <th scope="col">Nome</th>
-			  <th scope="col">Especialidade</th>
-			  <th scope="col">Telefone</th>
-			  <th scope="col">Endereço</th>
-			  <th scope="col">Contratar</th>
+				<th scope="col">id</th>
+				  <th scope="col">Nome</th>
+				  <th scope="col">Especialidade</th>
+				  <th scope="col">Telefone</th>
+				  <th scope="col">Endereço</th>
+				  <th scope="col">Aceitar</th>
 			</tr>
 		  </thead>
-		  <tbody>
-			<tr>
-			  <td>medico 1</td>
-			  <td>Mark</td>
-			  <td>Otto</td>
-			  <td>Otto</td>
-			  <td><button type="button" class="btn btn-dark">Dark</button></td>
-			</tr>
-			<tr>
-			  <td>medico 2</td>
-			  <td>Jacob</td>
-			  <td>Thornton</td>
-			  <td>Otto</td>
-			  <td><button type="button" class="btn btn-dark">Dark</button></td>
-			</tr>
-			<tr>
-			  <td>medico 3</td>
-			  <td >Larry the Bird</td>
-			  <td>@twitter</td>
-			  <td>Otto</td>
-			  <td><button type="button" class="btn btn-dark">Dark</button></td>
-			</tr>
-		  </tbody>
+		  <tbody id="tabpend">
+		  </tbody>		  
 		</table>
 	</nav>
-    <script type="text/javascript" src="cordova.js"></script>
-    <script type="text/javascript" src="js/index.js"></script>
-    <script type="text/javascript">
-        app.initialize();
-    </script>
+
 </body>
 
 </html>
